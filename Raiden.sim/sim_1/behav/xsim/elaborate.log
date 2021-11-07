@@ -1,0 +1,15 @@
+Vivado Simulator 2019.1
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: /home/luxoft/Xilinx/Vivado/2019.1/bin/unwrapped/lnx64.o/xelab -wto 74eeb84ebe254953b04088d4172332c7 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot uart_rx_tb_behav xil_defaultlib.uart_rx_tb xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.uart_rx
+Compiling module xil_defaultlib.uart_tx
+Compiling module xil_defaultlib.uart_rx_tb
+Compiling module xil_defaultlib.glbl
+ERROR: [XSIM 43-3409] Failed to compile generated C file xsim.dir/uart_rx_tb_behav/obj/xsim_1.c.
+ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue. Exiting... 
