@@ -53,6 +53,23 @@ module top(
 //  assign target_rx = ftdi_tx;
 
 
+wire clk_300mhz_out;
+wire clk_100mhz_out;
+wire clk_200mhz_out;
+wire clk_50mhz_out;
+
+clk_wiz_0 clck_i
+(
+// Clock out ports
+ .clk_300mhz_out(clk_300mhz_out), 
+ .clk_200mhz_out(clk_200mhz_out),
+ .clk_100mhz_out(clk_100mhz_out),
+ .clk_50mhz_out(clk_50mhz_out),    // output clk_400mhz_out
+ // Status and control signal
+  .clk_in1(clk)
+);      // 
+
+
 parameter AUTO = 2'd2;
 
 wire bit_out;
@@ -82,7 +99,7 @@ wire emmc_trigger;
 
 emmc emmc_inst (
   .rst(rst || reset_glitcher),
-  .emmc_clk(emmc_clk || clk),
+  .emmc_clk(emmc_clk || clk_100mhz_out),
   .emmc_dat0(emmc_dat0),
   .emmc_trigger_data(emmc_trigger_data),
   .emmc_trigger(emmc_trigger)
@@ -90,7 +107,7 @@ emmc emmc_inst (
 
 cmd cmd_inst
 (
-  .clk(clk),
+  .clk(clk_100mhz_out),
   .rst(rst),
   .din(ftdi_rx),
   .dout(bit_out),
@@ -125,7 +142,7 @@ wire rx_valid;
 
 //handle data byte for UART trigger
 uart_rx rxi_uart_trigger (
-  .clk(clk),
+  .clk(clk_100mhz_out),
   .rst(rst),
   .baud(uart_trigger_baud),
   .din(target_rx),
@@ -149,7 +166,7 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
  
  glitch glitchi
  (
-  .clk(clk),
+  .clk(clk_200mhz_out),
   .rst(rst || reset_glitcher),
   .enable(enable),
   .vout(glitch),
@@ -168,21 +185,21 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
   // LD0 - BLUE armed, GREEN glitching started, RED finished
   
    pwm pwm_led0_r (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(64),
     .signal(finished),
     .state(led0_r)
    );
    
    pwm pwm_led0_g (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(16),
     .signal(glitched && !finished),
     .state(led0_g)
    );
    
    pwm pwm_led0_b (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(64),
     .signal(!glitched && armed),
     .state(led0_b)
@@ -205,7 +222,7 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
 //   );
              
    pwm pwm_led1_b (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(16),
     .signal(uart_trigger),
     .state(led1_b)
@@ -214,21 +231,21 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
    // LD2 - trigger
           
    pwm pwm_led2_r (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(32),
     .signal(trigger_in),
     .state(led2_r)
    );
    
    pwm pwm_led2_g (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(4),
     .signal(trigger_in),
     .state(led2_g)
    );
                       
    pwm pwm_led2_b (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(48),
     .signal(trigger_in),
     .state(led2_b)
@@ -238,7 +255,7 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
           
                   
    pwm pwm_led3_b (
-    .clk(clk),
+    .clk(clk_50mhz_out),
     .duty(48),
     .signal(emmc_trigger),
     .state(led3_b)
@@ -251,7 +268,7 @@ wire enable =  (force_state == AUTO && (((armed && !finished) && trigger) || (gl
   assign led_blink = counter[26];
   assign led_glitch_out = glitch_out;
   
-  always @(posedge clk)
+  always @(posedge clk_300mhz_out)
   begin
     counter <= counter + 1;
   end
