@@ -1,6 +1,10 @@
 # Raiden project
 
-### Raiden is open source pulse generator project based on Xilinx Arty-7 AT-35 FPGA board. It supports any voltage glitching frontend like MAX4619CPE+ and works with any EMFI (Electromagnetic field Probe solution). Current version was tested with NewAE ChipShouter EMFI device and works as expected. It was created as part fo the research project to fill gap between flexible solution and costs by h0rac (Grzegorz Wypych) and @Major Malfunction (Adam Laurie) and released during Black Hat Asia 2020 as open source project.
+### Raiden is open source pulse generator project based on Xilinx Arty-7 AT-35 FPGA board. It supports any voltage glitching frontend like MAX4619CPE+ and works with any EMFI (Electromagnetic field Probe solution). Current version was tested with NewAE ChipShouter EMFI device and works as expected. It was created as part fo the research project to fill gap between flexible solution and costs by h0rac (Grzegorz Wypych) and @Major Malfunction (Adam Laurie) and released during Black Hat Asia 2020 as open source project. 
+
+
+NOTE:
+This version is not open sourced and it includes 200Mhz clock reference and UART triggering
 
  #### 1) Docs folder includes application schematic and connection diagram to Raiden based FPGA, power supplies and target board
 
