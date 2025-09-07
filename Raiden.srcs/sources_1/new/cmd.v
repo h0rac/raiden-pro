@@ -90,7 +90,7 @@ parameter UART_TRIGGER_BAUD = 8'd19;
 parameter EMMC_TRIGGER_DATA = 8'd20;
   
 reg [4:0] state = IDLE;
-wire bit_out;
+//wire bit_out;
 wire [7:0] rx_data;
 wire rx_valid;
 

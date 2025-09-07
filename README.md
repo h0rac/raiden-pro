@@ -14,6 +14,8 @@ This version is not open sourced and it includes 200Mhz clock reference and UART
 
 ### 4) Raiden port connections
 
+Note: UART trigger IN is on IO27
+
 #### 4.1) Standard port pinout
 
 ![standard](images/raiden-ports.png)
