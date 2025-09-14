@@ -4,7 +4,7 @@
 
 
 NOTE:
-This version is not open sourced and it includes 200Mhz clock reference and UART triggering
+This version was restriced, but is now open sourced and it includes 200Mhz clock reference and UART triggering
 
  #### 1) Docs folder includes application schematic and connection diagram to Raiden based FPGA, power supplies and target board
 
